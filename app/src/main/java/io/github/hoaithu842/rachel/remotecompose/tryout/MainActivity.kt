@@ -18,10 +18,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.github.hoaithu842.rachel.remotecompose.tryout.remote.RemoteColorScreen
-import io.github.hoaithu842.rachel.remotecompose.tryout.remote.RemoteDocumentLoader
 import io.github.hoaithu842.rachel.remotecompose.tryout.remote.RemoteDocumentView
 import io.github.hoaithu842.rachel.remotecompose.tryout.ui.theme.RachelRemoteComposeTryoutTheme
 import kotlinx.coroutines.Dispatchers
@@ -39,6 +39,7 @@ class MainActivity : ComponentActivity() {
                 var showDocumentScreen by remember { mutableStateOf(false) }
                 var documentBytes by remember { mutableStateOf<ByteArray?>(null) }
                 val scope = rememberCoroutineScope()
+                val context = LocalContext.current
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     if (showDocumentScreen && documentBytes != null) {
                         Box(
@@ -62,9 +63,9 @@ class MainActivity : ComponentActivity() {
                                 onClick = {
                                     scope.launch {
                                         val result = withContext(Dispatchers.IO) {
-                                            RemoteDocumentLoader.fetchDocument(SERVER_BASE)
+                                            temp(context)
                                         }
-                                        result.getOrNull()?.let { documentBytes = it }
+                                        result.let { documentBytes = it }
                                     }
                                 },
                                 modifier = Modifier

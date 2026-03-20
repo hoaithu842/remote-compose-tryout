@@ -41,8 +41,16 @@ android {
 
 dependencies {
     implementation("androidx.compose.remote:remote-core:1.0.0-alpha06")
-    implementation("androidx.compose.remote:remote-creation-jvm:1.0.0-alpha06")
+
+    implementation("androidx.compose.remote:remote-creation:1.0.0-alpha06")
+    implementation("androidx.compose.remote:remote-creation-core:1.0.0-alpha06")
+//    implementation("androidx.compose.remote:remote-creation-android:1.0.0-alpha06")
+//    implementation("androidx.compose.remote:remote-creation-jvm:1.0.0-alpha06")
+    implementation("androidx.compose.remote:remote-creation-compose:1.0.0-alpha06")
+    implementation("androidx.compose.remote:remote-player-core:1.0.0-alpha06")
     implementation("androidx.compose.remote:remote-player-view:1.0.0-alpha06")
+
+    implementation("androidx.compose.remote:remote-tooling-preview:1.0.0-alpha06")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
