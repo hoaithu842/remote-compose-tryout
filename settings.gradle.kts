@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "RachelRemoteComposeTryout"
 include(":app")
 include(":RachelRemoteComposeServer")
+include(":app-controller")
