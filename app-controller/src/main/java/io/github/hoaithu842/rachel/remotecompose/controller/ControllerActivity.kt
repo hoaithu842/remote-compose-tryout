@@ -33,8 +33,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 
-private const val RC_FILENAME = "composable_button.rc"
-
 class ControllerActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +75,7 @@ fun ControllerScreen() {
                         status = "Generating…"
                         val bytes = withContext(Dispatchers.IO) { generateDocument(context) }
                         documentBytes = bytes
-                        val dest = saveRcFile(context, bytes)
+                        val dest = saveRcFile(context, bytes, activeSpec.fileName)
                         status = if (dest != null) {
                             "Saved → ${dest.absolutePath}"
                         } else {
@@ -117,17 +115,10 @@ private fun PlayerView(documentBytes: ByteArray, modifier: Modifier = Modifier) 
     }
 }
 
-/**
- * Writes the .rc bytes into the app's external files directory so you can
- * `adb pull` it straight into the server's documents/ folder:
- *
- *   adb pull /sdcard/Android/data/io.github.hoaithu842.rachel.remotecompose.controller/files/composable_button.rc \
- *       RachelRemoteComposeServer/documents/
- */
-private fun saveRcFile(context: android.content.Context, bytes: ByteArray): File? {
+private fun saveRcFile(context: android.content.Context, bytes: ByteArray, fileName: String): File? {
     return try {
         val dir = context.getExternalFilesDir(null) ?: context.filesDir
-        val file = File(dir, RC_FILENAME)
+        val file = File(dir, fileName)
         file.writeBytes(bytes)
         file
     } catch (e: Exception) {
