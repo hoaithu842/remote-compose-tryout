@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import io.github.hoaithu842.rachel.remotecompose.controller.RemoteSpec
 
 val MarqueeSpec = RemoteSpec(
     fileName = "composable_marquee.rc",

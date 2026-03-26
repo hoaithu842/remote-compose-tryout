@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import io.github.hoaithu842.rachel.remotecompose.controller.RemoteSpec
 
 val ScrollSpec = RemoteSpec(
     fileName = "composable_scroll.rc",

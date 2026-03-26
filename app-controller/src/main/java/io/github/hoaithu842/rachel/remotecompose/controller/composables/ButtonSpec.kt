@@ -9,6 +9,7 @@ import androidx.compose.remote.creation.compose.state.RemoteColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import io.github.hoaithu842.rachel.remotecompose.controller.RemoteSpec
 
 val BUTTON_COLOR = Color(0xFF00BCD4)
 

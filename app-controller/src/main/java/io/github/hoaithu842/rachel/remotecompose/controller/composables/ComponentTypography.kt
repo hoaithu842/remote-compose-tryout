@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import io.github.hoaithu842.rachel.remotecompose.controller.RemoteSpec
 
 val TypographySpec = RemoteSpec(
     fileName = "composable_typography.rc",

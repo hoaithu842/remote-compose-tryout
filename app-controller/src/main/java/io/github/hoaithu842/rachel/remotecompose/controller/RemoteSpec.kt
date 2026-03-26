@@ -1,4 +1,4 @@
-package io.github.hoaithu842.rachel.remotecompose.controller.composables
+package io.github.hoaithu842.rachel.remotecompose.controller
 
 import androidx.compose.runtime.Composable
 

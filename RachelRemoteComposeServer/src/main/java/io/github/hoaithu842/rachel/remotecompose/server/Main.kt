@@ -72,6 +72,54 @@ fun main() {
         exchange.close()
     }
 
+    // ── GET /profile — serves documents/profile.rc ──
+    server.createContext("/profile") { exchange ->
+        if (exchange.requestMethod != "GET") {
+            exchange.sendResponseHeaders(405, -1)
+            exchange.close()
+            return@createContext
+        }
+        val file = File(REMOTE_DOCUMENTS_DIR, "profile.rc").canonicalFile
+        val docsDir = File(REMOTE_DOCUMENTS_DIR).canonicalPath
+        if (file.canonicalPath.startsWith(docsDir) && file.isFile) {
+            val bytes = Files.readAllBytes(file.toPath())
+            exchange.responseHeaders.add("Content-Type", "application/octet-stream")
+            exchange.sendResponseHeaders(200, bytes.size.toLong())
+            exchange.responseBody.use { it.write(bytes) }
+        } else {
+            val msg = "profile.rc not found in documents/"
+            val b = msg.toByteArray(Charsets.UTF_8)
+            exchange.responseHeaders.add("Content-Type", "text/plain; charset=UTF-8")
+            exchange.sendResponseHeaders(404, b.size.toLong())
+            exchange.responseBody.use { it.write(b) }
+        }
+        exchange.close()
+    }
+
+    // ── GET /settings — serves documents/settings.rc ──
+    server.createContext("/settings") { exchange ->
+        if (exchange.requestMethod != "GET") {
+            exchange.sendResponseHeaders(405, -1)
+            exchange.close()
+            return@createContext
+        }
+        val file = File(REMOTE_DOCUMENTS_DIR, "settings.rc").canonicalFile
+        val docsDir = File(REMOTE_DOCUMENTS_DIR).canonicalPath
+        if (file.canonicalPath.startsWith(docsDir) && file.isFile) {
+            val bytes = Files.readAllBytes(file.toPath())
+            exchange.responseHeaders.add("Content-Type", "application/octet-stream")
+            exchange.sendResponseHeaders(200, bytes.size.toLong())
+            exchange.responseBody.use { it.write(bytes) }
+        } else {
+            val msg = "settings.rc not found in documents/"
+            val b = msg.toByteArray(Charsets.UTF_8)
+            exchange.responseHeaders.add("Content-Type", "text/plain; charset=UTF-8")
+            exchange.sendResponseHeaders(404, b.size.toLong())
+            exchange.responseBody.use { it.write(b) }
+        }
+        exchange.close()
+    }
+
     // ── POST /remote/color — web sets the writer color ──
     server.createContext("/remote/color") { exchange ->
         if (exchange.requestMethod != "POST") {
@@ -163,6 +211,8 @@ fun main() {
     server.start()
     println("Remote server: http://localhost:$PORT/remote")
     println("  GET  /remote/document  — serves active document to app")
+    println("  GET  /profile          — serves documents/profile.rc")
+    println("  GET  /settings         — serves documents/settings.rc")
     println("  POST /remote/color     — set writer color (web)")
     println("  POST /remote/source    — switch writer / file (web)")
 }

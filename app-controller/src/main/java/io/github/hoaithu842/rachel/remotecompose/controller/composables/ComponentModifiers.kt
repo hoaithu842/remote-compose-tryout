@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import io.github.hoaithu842.rachel.remotecompose.controller.RemoteSpec
 
 val ModifiersSpec = RemoteSpec(
     fileName = "composable_modifiers.rc",
